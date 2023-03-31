@@ -1,0 +1,155 @@
+html {
+    /*background-image: url(./media/background1.jpg);
+    background-size: cover;*/
+    background-color: rgb(21, 144, 192);
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    background-color: transparent;
+}
+
+.container {
+    display: flex;
+    justify-content: space-evenly;
+    min-height: 100vh;
+}
+
+
+.left {
+    display: flex;
+    flex: 1 1 1;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    gap: 50px;
+}
+
+#avatar-p {
+    width: 100%;
+    height: auto;
+    border: 2px solid hsl(59, 97%, 45%);
+    border-radius: 5px;
+}
+
+.mossa-p {
+    border-radius: 5px;
+    border: 2px solid black;
+    width: 150px;
+    height: 150px;
+}
+
+
+.right {
+    display: flex;
+    flex: 1 1 1;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    gap: 50px;
+}
+
+#avatar-c {
+    width:100%;
+    height: auto;
+    border: 2px solid hsl(59, 97%, 45%);
+    border-radius: 5px;
+}
+
+.mossa-c {
+    border-radius: 5px;
+    border: 2px solid black;
+    width: 150px;
+    height: 150px;
+}
+
+.middle-container {
+    flex: 1 0 1;
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    flex-direction: column;
+}
+
+.titolo {
+    font-size: 50px;
+    font-family: Georgia, 'Times New Roman', Times, serif;
+    font-weight:bolder;
+    font-style: italic;
+    padding: 10px;
+    letter-spacing: 2px;
+    text-shadow:1px 1px white;
+    color: hsl(59, 97%, 45%);
+    text-align: center;
+}
+
+.punteggi {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    gap: 50px;
+    margin-bottom: 50px;
+}
+
+.punteggio-p , .punteggio-c {
+    border-radius: 5px;
+    border: 2px solid black;
+    width: 120px;
+    height: 120px;
+}
+
+.scelte {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    gap: 30px;
+    margin-bottom: 50px;
+}
+
+#carta , #sasso , #forbice {
+    border-radius: 15px;
+    width: 145px;
+    height: 145px;
+}
+
+#restart {
+    background: url(./media/replay.png);
+    background-size: cover;
+    border-radius: 20px;
+    width: 145px;
+    height: 145px;
+}
+
+#carta {
+    background: url(./media/carta1.png)center;
+    background-size: auto;
+}
+
+#sasso {
+    background: url(./media/sasso.png);
+    background-size:cover;
+}
+
+#forbice {
+    background: url(./media/forbici1.png) center;
+    background-size:auto;
+}
+
+
+.game-info {
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 30px;
+}
+
+.info {
+    border-radius: 5px;
+    border: 2px solid black;
+    width: 300px;
+    height: 125px;
+}
+
+

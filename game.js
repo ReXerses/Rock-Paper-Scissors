@@ -1,4 +1,4 @@
-function getComputerChoice () {
+/*function getComputerChoice () {
     let mossa = ['Sasso', 'Carta', 'Forbice'];
     return mossa[Math.floor(Math.random()*mossa.length)];
 }

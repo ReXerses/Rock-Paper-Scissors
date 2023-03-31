@@ -5,11 +5,41 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Rock Paper Scissors</title>
+    <link rel="Stylesheet" href="style.css">
 </head>
 
 <body>
-
     <script src="game.js"></script>
-    
+    <div class="container">
+        <div class="left">
+            <img id="avatar-p" src="media/1.jpg">
+            <div class="mossa-p"></div>
+        </div>
+        <div class="middle-container">
+            <h1 class="titolo">CARTA SASSO FORBICE!</h1>
+
+            <div class="punteggi">
+                <div class="punteggio-p"></div>
+                <div class="punteggio-c"></div>
+            </div>
+            <div class="scelte">
+                <button id="carta"></button>
+                <button id="sasso"></button>
+                <button id="forbice"></button>
+            </div>
+
+            <div class="game-info">
+                <button id="restart"></button>
+                <div class="info"></div>
+            </div>
+        </div>
+        <div class="right">
+            <img id="avatar-c" src="media/potato.jpg">
+            <div class="mossa-c"></div>
+        </div>
+
+    </div>
+
+
 </body>
 </html>
