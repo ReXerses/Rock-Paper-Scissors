@@ -9,7 +9,7 @@
 </head>
 
 <body>
-    <script src="game.js"></script>
+    
     <div class="container">
         <div class="left">
             <img id="avatar-p" src="media/1.jpg">
@@ -19,8 +19,8 @@
             <h1 class="titolo">CARTA SASSO FORBICE!</h1>
 
             <div class="punteggi">
-                <div class="punteggio-p"></div>
-                <div class="punteggio-c"></div>
+                <div class="punteggio-p">0</div>
+                <div class="punteggio-c">0</div>
             </div>
             <div class="scelte">
                 <button id="carta"></button>
@@ -40,6 +40,11 @@
 
     </div>
 
+    <audio vittoria="victory" src="media/incredible-ok.mp3"></audio>
+    <audio sconfitta="lost" src="media/incredible-losemp3.mp3"></audio>
+    <audio svantaggio="losing" src="media/incredible-neutral.mp3"></audio>
 
+
+    <script src="game.js"></script>
 </body>
 </html>
