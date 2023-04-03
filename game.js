@@ -1,13 +1,16 @@
 const bCarta= document.querySelector('#carta');
 const bSasso= document.querySelector('#sasso');
 const bForbice= document.querySelector('#forbice');
-const bpunteggioP= document.querySelector('.punteggio-p');
-const bpunteggioC= document.querySelector('.punteggio-c');
+const bpunteggioP= document.querySelector('#punt-giocatore');
+const bpunteggioC= document.querySelector('#punt-computer');
 const bmossaP= document.querySelector('.mossa-p');
 const bmossaC= document.querySelector('.mossa-c');
-const binfo = document.querySelector('.info');
+const binfo = document.querySelector('#info-box');
 const brestart= document.querySelector('#restart');
+const avatarP = document.querySelector(`#avatar-p`);
+const avatarC = document.querySelector(`#avatar-c`);
 
+let played = 0;
 
 function getComputerChoice () {
     let mossa = ['SASSO', 'CARTA', 'FORBICE'];
@@ -16,14 +19,17 @@ function getComputerChoice () {
         case 'SASSO' :
             bmossaC.style.background =  'url(./media/sasso.png) center';
             bmossaC.style.backgroundSize=  'auto';
+            bmossaC.classList.add('playing');
             break;
         case 'CARTA' :
             bmossaC.style.background =  'url(./media/carta1.png) center';
             bmossaC.style.backgroundSize=  'auto'; 
+            bmossaC.classList.add('playing');
             break;
         case 'FORBICE' :
             bmossaC.style.background =  'url(./media/forbici1.png) center';
             bmossaC.style.backgroundSize=  'auto';
+            bmossaC.classList.add('playing');
             break;
         default:
     }
@@ -35,85 +41,161 @@ function playRound(sceltaPlayer, sceltaComputer) {
     switch (sceltaPlayer) {
         case "CARTA": 
             if(sceltaComputer === 'SASSO') {
-                return 1;
+                bpunteggioP.dataset.score = parseInt(bpunteggioP.dataset.score) + 1;
+                bpunteggioP.textContent = bpunteggioP.dataset.score;
+                binfo.textContent = "Vincitore: Umano!";
+                terminaPartita();
+                
             }else if (sceltaComputer === 'FORBICE') {
-                return 0;
+                bpunteggioC.dataset.score = parseInt(bpunteggioC.dataset.score) + 1;
+                bpunteggioC.textContent = bpunteggioC.dataset.score;
+                binfo.textContent = "Vincitore: Computer!";
+                terminaPartita();
             }else {
-                return "Pareggio!";
+                binfo.textContent = "Pareggio!";
             }
+            break;
         case "SASSO":
             if(sceltaComputer === 'FORBICE') {
-                return 1;
+                bpunteggioP.dataset.score = parseInt(bpunteggioP.dataset.score) + 1;
+                bpunteggioP.textContent = bpunteggioP.dataset.score;
+                binfo.textContent = "Vincitore: Umano!";
+                terminaPartita();
             }else if (sceltaComputer === 'CARTA') {
-                return 0;
+                bpunteggioC.dataset.score = parseInt(bpunteggioC.dataset.score) + 1;
+                bpunteggioC.textContent = bpunteggioC.dataset.score;
+                binfo.textContent = "Vincitore: Computer!";
+                terminaPartita();
             }else {
-                return "Pareggio!";
+                binfo.textContent = "Pareggio!";
             }
+            break;
         case "FORBICE":
             if(sceltaComputer === 'CARTA') {
-                return 1;
+                bpunteggioP.dataset.score = parseInt(bpunteggioP.dataset.score) + 1;
+                bpunteggioP.textContent = bpunteggioP.dataset.score;
+                binfo.textContent = "Vincitore: Umano!";
+                terminaPartita();
             }else if (sceltaComputer === 'SASSO') {
-                return 0;
+                bpunteggioC.dataset.score = parseInt(bpunteggioC.dataset.score) + 1;
+                bpunteggioC.textContent = bpunteggioC.dataset.score;
+                binfo.textContent = "Vincitore: Computer!";
+                terminaPartita();
             }else {
-                return "Pareggio!";
+                binfo.textContent = "Pareggio!";
             }
-
+            break;
         default:
             return "Input inserito non corretto";
     }
 
 }
   
-function game () {
-    let plWin =0;
-    let punteggioP= document.querySelector('.punteggio-p');
-    let pcWin =0;
-    let punteggioC= document.querySelector('.punteggio-c');
-
-   while (plWin <= 5 || pcWin <=5) {
-        
-        let sceltaPlayer = sceltaPl ();
-        let sceltaComputer = getComputerChoice();
-        let result = playRound(sceltaPlayer.toUpperCase(), sceltaComputer.toUpperCase());
-
-        if (result === 1) {
-            console.log(`Hai vinto! ${sceltaPlayer} vince contro ${sceltaComputer}.`);
-            plWin+=1;
-        } else if (result === 0) {
-            console.log(`Hai Perso! ${sceltaPlayer} perde contro ${sceltaComputer}.`);
-            pcWin+=1;
+function terminaPartita () {
+    if (bpunteggioC.dataset.score == '5' || bpunteggioP.dataset.score == '5') {
+        if (bpunteggioP.dataset.score >  bpunteggioC.dataset.score ) {
+            binfo.textContent = "L'Umano vince la partita! Clicca il pulsante Reset per ricominciare"
+            transizioni();
         } else {
-            console.log("Pareggio.");
+            binfo.textContent = "Il Computer vince la partita! Clicca il pulsante Reset per ricominciare"
+            transizioni();
         }
-
+        return 'finita';
     }
-    if (plWin > pcWin) {
-        return "Hai vinto la partita!";
-    } else if (pcWin > plWin) {
-        return "Hai perso la partita!";
-    } else {
-        return "La partita finisce con un pareggio!";
-    } 
+}
+
+function restart () {
+    bmossaP.style.background =  'none';
+    bmossaC.style.background =  'none';
+    binfo.textContent = "New Game!";
+    bpunteggioP.dataset.score = '0';
+    bpunteggioP.textContent= '0';
+    bpunteggioC.dataset.score = '0';
+    bpunteggioC.textContent = '0';
+    avatarC.src = "media/potato.jpg";
+    avatarP.src = "media/1.jpg";
+    played=0;
+    sound.pause();
+    sound.currentTime = 0;
 }
 
 
+function transizioni () {
+    if (bpunteggioP.dataset.score == bpunteggioC.dataset.score) {
+        return ;
+    }
+    if (bpunteggioC.dataset.score == '5' && played != 1) {
+        const audio= document.querySelector(`#lost`);
+        audio.currentTime= 0;
+        audio.play();
+        avatarP.src = "media/incredible-lose.jpeg";
+        avatarC.src = "media/pc-win.jpeg";
+        played = 1;
+
+    } else if (bpunteggioP.dataset.score == '5' && played != 1 ) {
+        const audio= document.querySelector(`#victory`);
+        audio.play();
+        audio.currentTime= 0;
+        avatarP.src = "media/4.jpg" ;
+        avatarC.src = "media/pc-lose.png";
+        played = 1;
+
+    } else if (bpunteggioP.dataset.score < bpunteggioC.dataset.score && played != 1) {
+        const audio= document.querySelector(`#losing`);
+        audio.play();
+        audio.currentTime= 0;
+    }
+}
+
+function removeTransition (e) {
+    if(e.propertyName !== 'transform') return; //Salta se non e` trasform
+    this.classList.remove('playing');
+  }
+
+
 bCarta.addEventListener("click", () => {
-    bmossaP.style.background =  'url(./media/carta1.png) center';
-    bmossaP.style.backgroundSize=  'auto';
-    console.log(playRound('CARTA', getComputerChoice()));
+
+    if (terminaPartita() !=  'finita') {
+        bmossaP.style.background =  'url(./media/carta1.png) center';
+        bmossaP.style.backgroundSize=  'auto';
+        bmossaP.classList.add('playing');
+        playRound('CARTA', getComputerChoice());
+        transizioni();
+    }
+
 });
 
 bSasso.addEventListener("click", () => {
-    bmossaP.style.background =  'url(./media/sasso.png) center';
-    bmossaP.style.backgroundSize=  'auto';
-    console.log(playRound('SASSO', getComputerChoice()));
+
+    if (terminaPartita() !=  'finita') {
+        bmossaP.style.background =  'url(./media/sasso.png) center';
+        bmossaP.style.backgroundSize=  'auto';
+        bmossaP.classList.add('playing');
+        playRound('SASSO', getComputerChoice());
+        transizioni();
+    }
+
 });
 
 bForbice.addEventListener("click", () => {
-    bmossaP.style.background =  'url(./media/forbici1.png) center';
-    bmossaP.style.backgroundSize=  'auto';
-    console.log(playRound('FORBICE', getComputerChoice()));
+
+    if (terminaPartita() !=  'finita') {
+        bmossaP.style.background =  'url(./media/forbici1.png) center';
+        bmossaP.style.backgroundSize=  'auto';
+        bmossaP.classList.add('playing');
+        playRound('FORBICE', getComputerChoice());
+        transizioni();
+    }
+
 });
 
-//(game());
+bmossaP.addEventListener('transitionend', removeTransition);
+bmossaC.addEventListener('transitionend', removeTransition);
+
+brestart.addEventListener('click', () => {
+    restart();
+});
+
+
+
 
