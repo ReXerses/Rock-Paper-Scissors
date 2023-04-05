@@ -13,6 +13,7 @@ const avatarC = document.querySelector(`#avatar-c`);
 let played = 0;
 
 function getComputerChoice () {
+
     let mossa = ['SASSO', 'CARTA', 'FORBICE'];
     let scelta= mossa[Math.floor(Math.random()*mossa.length)];
     switch (scelta) {
@@ -38,6 +39,7 @@ function getComputerChoice () {
 
 
 function playRound(sceltaPlayer, sceltaComputer) {
+
     switch (sceltaPlayer) {
         case "CARTA": 
             if(sceltaComputer === 'SASSO') {
@@ -92,6 +94,7 @@ function playRound(sceltaPlayer, sceltaComputer) {
 }
   
 function terminaPartita () {
+
     if (bpunteggioC.dataset.score == '5' || bpunteggioP.dataset.score == '5') {
         if (bpunteggioP.dataset.score >  bpunteggioC.dataset.score ) {
             binfo.textContent = "L'Umano vince la partita! Clicca il pulsante Reset per ricominciare"
@@ -105,6 +108,7 @@ function terminaPartita () {
 }
 
 function restart () {
+
     bmossaP.style.background =  'none';
     bmossaC.style.background =  'none';
     binfo.textContent = "New Game!";
@@ -115,12 +119,23 @@ function restart () {
     avatarC.src = "media/potato.jpg";
     avatarP.src = "media/1.jpg";
     played=0;
-    sound.pause();
-    sound.currentTime = 0;
+    stopSound();
+
+}
+
+/* This function stop the sound after the restart button is clicked */
+function stopSound () {      
+
+    const audioStop = document.querySelectorAll('audio');
+
+    audioStop.forEach((audio) => {
+        audio.pause();
+    })
 }
 
 
 function transizioni () {
+
     if (bpunteggioP.dataset.score == bpunteggioC.dataset.score) {
         return ;
     }
@@ -148,10 +163,12 @@ function transizioni () {
 }
 
 function removeTransition (e) {
+
     if(e.propertyName !== 'transform') return; //Salta se non e` trasform
     this.classList.remove('playing');
-  }
+}
 
+/* Event Listeners */
 
 bCarta.addEventListener("click", () => {
 
@@ -192,9 +209,8 @@ bForbice.addEventListener("click", () => {
 bmossaP.addEventListener('transitionend', removeTransition);
 bmossaC.addEventListener('transitionend', removeTransition);
 
-brestart.addEventListener('click', () => {
-    restart();
-});
+brestart.addEventListener('click', restart );
+
 
 
 
